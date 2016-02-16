@@ -41,6 +41,8 @@ dependencyManagement {
 }
 
 dependencies {
+    runtime "commons-io:commons-io:2.4"
+
     compile "org.springframework.boot:spring-boot-starter-logging"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.grails:grails-core"
