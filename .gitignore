@@ -30,7 +30,7 @@ build/
 /plugin.xml
 
 # older plugin install locations
-/plugins
+#/plugins
 /web-app/plugins
 
 # "temporary" build files
@@ -109,6 +109,6 @@ styler-grailsPlugins.iml
 .classpath
 .project
 eclipse
-/plugins
+#/plugins
 web-app/WEB-INF/tld/fmt.tld
 workarea/
