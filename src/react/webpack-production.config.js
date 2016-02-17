@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 //var buildPath = path.resolve(__dirname, 'build');
-var buildPath = path.resolve(__dirname, '../../grails-app/assets');
+var buildPath = path.resolve(__dirname, '../../grails-app/assets/javascripts');
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var TransferWebpackPlugin = require('transfer-webpack-plugin');
 
@@ -31,7 +31,7 @@ var config = {
     new webpack.NoErrorsPlugin(),
     //Transfer Files
     new TransferWebpackPlugin([
-      {from: 'www'}
+      {from: 'www/css', to: '../stylesheets'}
     ], path.resolve(__dirname,"src"))
   ],
   module: {
