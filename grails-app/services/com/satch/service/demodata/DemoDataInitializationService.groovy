@@ -92,15 +92,16 @@ class DemoDataInitializationService {
         def sup2 = new Supplier(supplierId: 'puma', supplierName: 'Puma', classification: systemClassification, classificationGroup: supplierClassificationGroup).save(failOnError: true)
         def sup3 = new Supplier(supplierId: 'megatop', supplierName: 'Мегатоп', classification: systemClassification, classificationGroup: supplierClassificationGroup).save(failOnError: true)
 
-        String path = Thread.currentThread().getContextClassLoader().getResource("by/prigus/styler/demo/images").getPath()
-        def logo = {String filePath, Supplier sup -> fileManagerService.getFilePath(fileManagerService.copyFileToSupplierDir(new File(filePath), sup, "logo"))}
-        sup1.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('logo'), value: logo(path + '/suppliers/nike-logo.jpg', sup1)).save(failOnError: true))
-        sup2.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('logo'), value: logo(path + '/suppliers/puma-logo.png', sup2)).save(failOnError: true))
-        sup3.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('logo'), value: logo(path + '/suppliers/megatop_logo.jpg', sup3)).save(failOnError: true))
-
-        sup1.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('description'), value: 'Просто сделай это.').save(failOnError: true))
-        sup2.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('description'), value: 'Ощути лёгкость вместе с нами.').save(failOnError: true))
-        sup3.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('description'), value: 'Обувь большого города.').save(failOnError: true))
+//        TODO:Implement LOGO assigning
+//        String path = Thread.currentThread().getContextClassLoader().getResource("assets").getPath()
+//        def logo = {String filePath, Supplier sup -> fileManagerService.getFilePath(fileManagerService.copyFileToSupplierDir(new File(filePath), sup, "logo"))}
+//        sup1.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('logo'), value: logo(path + '/suppliers/nike-logo.jpg', sup1)).save(failOnError: true))
+//        sup2.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('logo'), value: logo(path + '/suppliers/puma-logo.png', sup2)).save(failOnError: true))
+//        sup3.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('logo'), value: logo(path + '/suppliers/megatop_logo.jpg', sup3)).save(failOnError: true))
+//
+//        sup1.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('description'), value: 'Просто сделай это.').save(failOnError: true))
+//        sup2.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('description'), value: 'Ощути лёгкость вместе с нами.').save(failOnError: true))
+//        sup3.addToAttributeValues(new AttributeValue(attribute: Attribute.findByAttributeId('description'), value: 'Обувь большого города.').save(failOnError: true))
 
         suppliers.addAll([sup1, sup2, sup3])
     }
@@ -124,18 +125,19 @@ class DemoDataInitializationService {
                     manufacturer: dataGenerationService.generateProductManufacturer(),
             ).save(failOnError: true)
 
-            product.addToAttributeValues(
-                    new AttributeValue(attribute: basicAttributes[0], value: dataGenerationService.generateProductImagePath(classificationGroup, catalog.store.supplier)).
-                            save(failOnError: true)
-            ).save(failOnError: true)
-
-            4.times{ i ->
-                if(random.nextBoolean())
-                    product.addToAttributeValues(
-                        new AttributeValue(attribute: basicAttributes[i + 1], value: dataGenerationService.generateProductImagePath(classificationGroup, catalog.store.supplier)
-                        ).save(failOnError: true)
-                    ).save(failOnError: true)
-            }
+//            TODO: Implement
+//            product.addToAttributeValues(
+//                    new AttributeValue(attribute: basicAttributes[0], value: dataGenerationService.generateProductImagePath(classificationGroup, catalog.store.supplier)).
+//                            save(failOnError: true)
+//            ).save(failOnError: true)
+//
+//            4.times{ i ->
+//                if(random.nextBoolean())
+//                    product.addToAttributeValues(
+//                        new AttributeValue(attribute: basicAttributes[i + 1], value: dataGenerationService.generateProductImagePath(classificationGroup, catalog.store.supplier)
+//                        ).save(failOnError: true)
+//                    ).save(failOnError: true)
+//            }
 
             dataGenerationService.generateAttributeValues(product)
 
