@@ -1,0 +1,3 @@
+[submodule "satch-react-ui"]
+      path = plugins/satch-react-ui
+      url = git://Ghbnxby@bitbucket.org/Ghbnxby/satch-react-ui.git
