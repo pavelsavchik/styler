@@ -1,5 +1,6 @@
 import grails.util.BuildSettings
 import grails.util.Environment
+import com.logentries.log4j.LogentriesAppender
 
 // See http://logback.qos.ch/manual/groovy.html for details on configuration
 appender('STDOUT', ConsoleAppender) {
@@ -8,7 +9,20 @@ appender('STDOUT', ConsoleAppender) {
     }
 }
 
-root(ERROR, ['STDOUT'])
+def appenderList = ['STDOUT']
+
+if (Environment.getCurrent() == Environment.PRODUCTION) {
+    appender('LOGENTRIES', LogentriesAppender) {
+        name = 'le'
+        encoder(PatternLayoutEncoder) {
+            pattern = '%d{yyyy-MM-dd HH:mm:ss} %-5p [%-18c{1}] %m%n'
+        }
+//        layout = new org.apache.log4j.PatternLayout('%d{yyyy-MM-dd HH:mm:ss} %-5p [%-18c{1}] %m%n')
+        token = "d501da46-62a3-4a06-93f7-c76733c4b082"
+    }
+    appenderList << "LOGENTRIES"
+}
+root(ERROR, appenderList)
 
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir) {
