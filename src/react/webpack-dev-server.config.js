@@ -26,6 +26,7 @@ var config = {
   },
   devtool: 'eval',
   output: {
+    library: "SatchUi",
     path: buildPath,    //Path of output file
     filename: 'app.js'
   },

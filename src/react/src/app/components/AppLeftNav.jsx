@@ -94,7 +94,7 @@ const AppLeftNav = React.createClass({
         <SelectableList
           valueLink={{value: '', requestChange: this.handleRequestChangeLink}}
         >
-          <ListItem primaryText="GitHub" value="https://github.com/callemall/material-ui" />
+          <ListItem primaryText="Sign out"/>
         </SelectableList>
       </LeftNav>
     );

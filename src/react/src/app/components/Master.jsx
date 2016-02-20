@@ -151,10 +151,9 @@ const Master = React.createClass({
 
     const styles = this.getStyles();
     const title =
-      history.isActive('/get-started') ? 'Get Started' :
-        history.isActive('/customization') ? 'Customization' :
-          history.isActive('/components') ? 'Components' :
-            history.isActive('/discover-more') ? 'Discover More' : '';
+      history.isActive('/stores') ? 'Stores' :
+        history.isActive('/catalogue') ? 'Catalogue' :
+          history.isActive('/home') || history.isActive('/') ? 'Home' :'';
 
     let docked = false;
     let showMenuIconButton = true;

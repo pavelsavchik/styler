@@ -29,7 +29,9 @@
     "webpack-dev-server": "^1.14.0",
 
     "react-router": "1.0.2",
-    "history": "1.13.x"
+    "history": "1.13.x",
+    "axios": "0.9.1",
+    "react-infinite": "0.8.0"
   },
   "dependencies": {
     "material-ui": "^0.14.4",

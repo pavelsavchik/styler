@@ -16,6 +16,7 @@ var config = {
   devtool: 'source-map',
   //output config
   output: {
+    library: "SatchUi",
     path: buildPath,    //Path of output file
     filename: 'satch-react-ui.bundle.js'  //Name of output file
   },

@@ -4,6 +4,7 @@ import {Router} from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppRoutes from './routes/AppRoutes.jsx'; // Our custom react component
 import createHistory from 'history/lib/createHashHistory';
+import ContextSetter from './components/ContextSetter.jsx';
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release
@@ -13,11 +14,19 @@ injectTapEventPlugin();
 
 // Render the main app react component into the app div.
 // For more details see: https://facebook.github.io/react/docs/top-level-api.html#react.render
-ReactDOM.render(
-  <Router
-    history={createHistory({queryKey: false})}
-    onUpdate={() => window.scrollTo(0, 0)}
-  >
-    {AppRoutes}
-  </Router>
-  , document.getElementById('app'));
+function renderSatchUi(element, props) {
+  ReactDOM.render(
+    <ContextSetter {...props}>
+      <Router
+          history={createHistory({queryKey: false})}
+          onUpdate={() => window.scrollTo(0, 0)}
+      >
+        {AppRoutes}
+      </Router>
+   </ContextSetter>
+    , element);
+}
+
+export default {
+  renderSatchUi: renderSatchUi,
+};

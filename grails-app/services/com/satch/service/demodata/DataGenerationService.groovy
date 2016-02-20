@@ -155,7 +155,7 @@ class DataGenerationService {
     }
 
     def generateProductImagePath(def classificationGroup, Supplier supplier){
-        String path = Thread.currentThread().getContextClassLoader().getResource("by/prigus/styler/demo/images/${classificationGroup.classificationGroupId}").path
+        String path = Thread.currentThread().getContextClassLoader().getResource("WEB-INF/images/${classificationGroup.classificationGroupId}").path
         def imageFolder = new File(path + "/")
         def imagesList = []
         imageFolder.eachFileRecurse (FileType.FILES) { file ->

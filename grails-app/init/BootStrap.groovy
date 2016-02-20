@@ -3,6 +3,8 @@ import grails.converters.JSON
 
 class BootStrap {
 
+    def grailsApplication
+
     def demoDataInitializationService
 
     def init = { servletContext ->
@@ -31,7 +33,9 @@ class BootStrap {
             workareaDir.mkdir()
         }
 
-        demoDataInitializationService.initDemoData(50, 5)
+        if(grailsApplication.config.com.satch.populatedb != 'update') {
+            demoDataInitializationService.initDemoData(50, 5)
+        }
     }
 
     def destroy = {
