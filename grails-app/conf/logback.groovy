@@ -1,6 +1,6 @@
 import grails.util.BuildSettings
 import grails.util.Environment
-import com.logentries.log4j.LogentriesAppender
+import com.logentries.logback.LogentriesAppender
 
 // See http://logback.qos.ch/manual/groovy.html for details on configuration
 appender('STDOUT', ConsoleAppender) {
