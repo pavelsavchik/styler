@@ -14,7 +14,7 @@
 *Db.script
 
 .gradle/
-gradle/
+# gradle/
 build/
 .asscache
 # logs
