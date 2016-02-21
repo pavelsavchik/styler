@@ -64,6 +64,8 @@ dependencies {
     //added manually plugin
     runtime 'org.grails.plugins:grails-console:2.0.4'
     compile "com.logentries:logentries-appender:1.1.32"
+    compile 'com.github.jsimone:webapp-runner:8.0.30.2'
+    compile 'org.eclipse.jetty:jetty-runner:9.2.11.v20150529'
 
     //subprojects
 //    compile project(':plugins/satch-react-ui')
