@@ -26,7 +26,7 @@ if (Environment.getCurrent() == Environment.PRODUCTION) {
     root(INFO, ['LOGENTRIES'])
     logger("StackTrace", ERROR, ['LOGENTRIES'], false)
     logger("StackTrace", INFO, ['LOGENTRIES'], false)
-    logger("StackTrace", WARNhg , ['LOGENTRIES'], false)
+    logger("StackTrace", WARN , ['LOGENTRIES'], false)
 } else {
     root(ERROR, ['STDOUT'])
 }
