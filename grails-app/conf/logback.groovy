@@ -9,20 +9,27 @@ appender('STDOUT', ConsoleAppender) {
     }
 }
 
-def appenderList = ['STDOUT']
-
 if (Environment.getCurrent() == Environment.PRODUCTION) {
     appender('LOGENTRIES', LogentriesAppender) {
-        name = 'le'
         encoder(PatternLayoutEncoder) {
             pattern = '%d{yyyy-MM-dd HH:mm:ss} %-5p [%-18c{1}] %m%n'
         }
-//        layout = new org.apache.log4j.PatternLayout('%d{yyyy-MM-dd HH:mm:ss} %-5p [%-18c{1}] %m%n')
+        ssl = false
+        facility = 'USER'
+        layout(ch.qos.logback.classic.PatternLayout) {
+            pattern = '%d{yyyy-MM-dd HH:mm:ss} %-5p [%-18c{1}] %m%n'
+        }
         token = "d501da46-62a3-4a06-93f7-c76733c4b082"
     }
-    appenderList << "LOGENTRIES"
+    root(ERROR, ['STDOUT', 'LOGENTRIES'])
+    root(WARN, ['LOGENTRIES'])
+    root(INFO, ['LOGENTRIES'])
+    logger("StackTrace", ERROR, ['LOGENTRIES'], false)
+    logger("StackTrace", INFO, ['LOGENTRIES'], false)
+    logger("StackTrace", WARNhg , ['LOGENTRIES'], false)
+} else {
+    root(ERROR, ['STDOUT'])
 }
-root(ERROR, appenderList)
 
 def targetDir = BuildSettings.TARGET_DIR
 if (Environment.isDevelopmentMode() && targetDir) {
