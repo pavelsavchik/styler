@@ -11,7 +11,7 @@
   <asset:stylesheet src="satch-react-ui.css"/>
 </head>
 
-<body>
+<body style="margin: 0px;">
 <div id="app"></div>
 
 <!-- This script adds the Roboto font to our project. For more detail go to this site:  http://www.google.com/fonts#UsePlace:use/Collection:Roboto:400,300,500 -->
