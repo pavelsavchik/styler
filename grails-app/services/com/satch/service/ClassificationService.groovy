@@ -33,4 +33,30 @@ class ClassificationService {
         classificationGroupList << classificationGroup
         return classificationGroupList
     }
+
+    List classifications(){
+        def classifications = Classification.findAll("from Classification as c where c.classificationId not in ('basic', 'system')");
+        def classificationTree = classifications.collect{ classification ->
+            [
+                    classificationId: classification.classificationId,
+                    description: classification.description,
+                    classificationGroups: transformClassificationGroups(classification.classificationGroups.findAll{clsGrp -> !clsGrp.parentClassificationGroup})
+            ]
+        }
+        return classificationTree
+    }
+
+    private List transformClassificationGroups(Set classificationGroups){
+        if(!classificationGroups) return null
+        return  classificationGroups.collect{ classificationGroup ->
+            [
+                    classificationGroupId: classificationGroup.classificationGroupId,
+                    description: classificationGroup.description,
+                    classificationId: classificationGroup.classification.classificationId,
+                    classificationGroups: transformClassificationGroups(classificationGroup.childClassificationGroups)
+            ]
+        }
+    }
+
+
 }
