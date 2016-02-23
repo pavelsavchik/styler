@@ -15,10 +15,11 @@ injectTapEventPlugin();
 // Render the main app react component into the app div.
 // For more details see: https://facebook.github.io/react/docs/top-level-api.html#react.render
 function renderSatchUi(element, props) {
+  let history = createHistory({queryKey: false});
   ReactDOM.render(
-    <ContextSetter {...props}>
+    <ContextSetter {...props} history={history}>
       <Router
-          history={createHistory({queryKey: false})}
+          history={history}
           onUpdate={() => window.scrollTo(0, 0)}
       >
         {AppRoutes}

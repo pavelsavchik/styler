@@ -31,7 +31,7 @@ class ProductController {
             return render(status: BAD_REQUEST)
         }
 
-        def product = Product.get(params.productId)
+        def product = Product.findByProductId(params.productId)
         if(!product){
             return render(status: NOT_FOUND)
         }

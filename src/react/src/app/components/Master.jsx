@@ -173,7 +173,7 @@ const Master = React.createClass({
 
     return (
       <div>
-        <Title render="Material-UI" />
+        <Title render="Satch #" />
         <AppBar
           onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
           title={title}

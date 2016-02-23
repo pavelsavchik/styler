@@ -88,7 +88,7 @@ const AppLeftNav = React.createClass({
         >
           <ListItem primaryText="Catalogue" value="/catalogue" />
           <ListItem primaryText="Stores" value="/stores" />
-          <ListItem primaryText="Home" value="/home" />
+          <ListItem primaryText="News" value="/news" />
         </SelectableList>
         <Divider />
         <SelectableList
