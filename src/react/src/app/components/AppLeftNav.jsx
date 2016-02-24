@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 import LeftNav from 'material-ui/lib/left-nav';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
@@ -57,6 +59,7 @@ const AppLeftNav = React.createClass({
   },
 
   render() {
+    window.pr = this.props;
     const {
       location,
       docked,
@@ -101,4 +104,10 @@ const AppLeftNav = React.createClass({
   },
 });
 
-export default AppLeftNav;
+export default connect(
+  // Use a selector to subscribe to state
+  state => ({ query: state.router.location.query }),
+
+  // Use an action creator for navigation
+  { pushState }
+)(AppLeftNav);
