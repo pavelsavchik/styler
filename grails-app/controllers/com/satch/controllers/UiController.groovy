@@ -6,8 +6,8 @@ class UiController {
 
     }
 
-    def home(){
-        render "sdfsdfsdf"
+    def dev(){
+
     }
 
 }
