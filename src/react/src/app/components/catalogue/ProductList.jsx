@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 import Infinite from 'react-infinite';
 
 import CircularProgress from 'material-ui/lib/circular-progress';
@@ -11,7 +13,7 @@ const styles = {
   },
 };
 
-export default class ProductList extends React.Component {
+class ProductList extends React.Component {
 
   static contextTypes = {
     productRestUrl: React.PropTypes.string,
@@ -22,12 +24,20 @@ export default class ProductList extends React.Component {
     isInfiniteLoading: false,
   }
 
+  componentWillReceiveProps(nextProps){
+    if(JSON.stringify(this.props.query) !== JSON.stringify(nextProps.query)){
+      this.setState({products:[]});
+      this.handleInfiniteLoad();
+    }
+  }
+
   handleInfiniteLoad = () => {
+    let {query} = this.props;
     let that = this;
     this.setState({
       isInfiniteLoading: true,
     });
-    axios.get(this.context.productRestUrl, {offset: this.state.products.length, max: 20})
+    axios.get(this.context.productRestUrl, Object.assign({offset: this.state.products.length, max: 20}, query))
       .then(function (response) {
         that.setState({
           isInfiniteLoading: false,
@@ -43,7 +53,6 @@ export default class ProductList extends React.Component {
     return <CircularProgress />;
   }
 
-
   render () {
     return <Infinite elementHeight={50}
                      infiniteLoadBeginEdgeOffset={200}
@@ -58,3 +67,8 @@ export default class ProductList extends React.Component {
     </Infinite>;
   }
 }
+
+export default connect(
+  state => ({ query: state.router.location.query }),
+  { pushState }
+)(ProductList);
