@@ -53,7 +53,7 @@ export default class ProductList extends React.Component {
                      isInfiniteLoading={this.state.isInfiniteLoading}
     >
       {this.state.products.map((product,i) => {
-        return <ProductTile key={i} product={product}/>
+        return <ProductTile key={i} num={i} product={product}/>
       })}
     </Infinite>;
   }

@@ -1,10 +1,10 @@
 {
-  "name": "material-ui-example-webpack",
-  "version": "0.14.4",
-  "description": "Sample project that uses material-ui",
+  "name": "satch-react-ui",
+  "version": "0.1.0",
+  "description": "Styler",
   "repository": {
     "type": "git",
-    "url": "https://github.com/callemall/material-ui.git"
+    "url": "https://github.com/pavelsavchik/styler"
   },
   "scripts": {
     "start": "webpack-dev-server --config webpack-dev-server.config.js --progress --inline --colors",
