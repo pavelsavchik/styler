@@ -15,7 +15,8 @@ class Product {
     static hasMany = [attributeValues: AttributeValue]
 
     static constraints = {
-        productId blank: false, unique: 'catalog'
+//        productId blank: false, unique: 'catalog'
+        productId nullable: true
         shortDesc nullable: false, blank: false
         catalog nullable: false
         classification nullable: true
