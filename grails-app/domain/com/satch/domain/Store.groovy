@@ -19,5 +19,6 @@ class Store {
     static mapping = {
         attributeValues cascade: 'all-delete-orphan'
         stocks cascade: 'all-delete-orphan'
+        id generator: 'hilo'
     }
 }

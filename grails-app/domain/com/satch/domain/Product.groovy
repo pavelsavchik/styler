@@ -28,5 +28,6 @@ class Product {
 
     static mapping = {
         attributeValues cascade: 'all-delete-orphan'
+        id generator: 'hilo'
     }
 }
