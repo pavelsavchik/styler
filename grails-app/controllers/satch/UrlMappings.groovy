@@ -26,6 +26,12 @@ class UrlMappings {
         "/products/$productId"(controller: 'product', action: 'update', method: 'PUT')
         "/products/$productId"(controller: 'product', action: 'delete', method: 'DELETE')
 
+        "/stores/$id"(controller: 'store', action: 'show', method: 'GET')
+        "/stores"(controller: 'store', action: 'save', method: 'POST')
+        "/stores"(controller: 'store', action: 'list', method: 'GET')
+        "/stores/$id"(controller: 'store', action: 'update', method: 'PUT')
+        "/stores/$id"(controller: 'store', action: 'delete', method: 'DELETE')
+
         //Classification REST
         "/classifications"(controller: 'classification', action: 'list', method: 'GET')
     }
