@@ -1,8 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { pushState } from 'redux-router';
 import LeftNav from 'material-ui/lib/left-nav';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import Divider from 'material-ui/lib/divider';
+import ClassificationFilter from './filters/ClassificationFilter.jsx';
 import {SelectableContainerEnhance} from 'material-ui/lib/hoc/selectable-enhance';
 import {
   Colors,
@@ -86,10 +89,11 @@ const AppLeftNav = React.createClass({
         <SelectableList
           valueLink={{value: location.pathname, requestChange: onRequestChangeList}}
         >
-          <ListItem primaryText="Catalogue" value="/catalogue" />
           <ListItem primaryText="Stores" value="/stores" />
           <ListItem primaryText="News" value="/news" />
         </SelectableList>
+        <Divider />
+        <ClassificationFilter location={location} />
         <Divider />
         <SelectableList
           valueLink={{value: '', requestChange: this.handleRequestChangeLink}}
@@ -101,4 +105,7 @@ const AppLeftNav = React.createClass({
   },
 });
 
-export default AppLeftNav;
+export default connect(
+  state => ({ query: state.router.location.query }),
+  { pushState }
+)(AppLeftNav);

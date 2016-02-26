@@ -29,10 +29,10 @@ class Main extends React.Component {
   }
 
   render() {
-    let {product} = this.props;
+    let {product, num} = this.props;
     return (
       <Paper style={styles.paper}>
-        <img src="http://lorempixel.com/160/240/fashion" onClick={this.onClick}/>
+        <img src={"http://lorempixel.com/160/240/fashion/" + ( num % 11 ).toString()} onClick={this.onClick}/>
         <p style={styles.p} onClick={this.onClick}>{product.shortDesc}</p>
         <p style={styles.p} onClick={this.onClick}>$ {product.price.toString()}</p>
       </Paper>

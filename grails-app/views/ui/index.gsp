@@ -30,11 +30,10 @@
   })();
 </script>
 <asset:javascript src="satch-react-ui.bundle.js"/>
-%{--for development--}%
-%{--<script src="http://localhost:3000/app.js"></script>--}%
 <script>
   window.SatchUi.default.renderSatchUi(document.getElementById('app'), {
-    productRestUrl: '${g.createLink(absolute: true, uri:'/products')}'
+    productRestUrl: '${g.createLink(absolute: true, uri:'/products')}',
+    classificationRestUrl: '${g.createLink(absolute: true, uri:'/classifications')}'
   });
 </script>
 </body>
