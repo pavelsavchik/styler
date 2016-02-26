@@ -25,4 +25,8 @@ class Product {
         price nullable: true
         isSearchable nullable: true
     }
+
+    static mapping = {
+        attributeValues cascade: 'all-delete-orphan'
+    }
 }

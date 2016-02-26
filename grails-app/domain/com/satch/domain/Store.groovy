@@ -15,4 +15,9 @@ class Store {
         description blank: false
         supplier nullable: false, blank: false
     }
+
+    static mapping = {
+        attributeValues cascade: 'all-delete-orphan'
+        stocks cascade: 'all-delete-orphan'
+    }
 }

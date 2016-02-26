@@ -12,4 +12,9 @@ class Catalog {
         catalogId blank: false, unique: 'store'
         description blank: false
     }
+
+    static mapping = {
+        attributeValues cascade: 'all-delete-orphan'
+        products cascade: 'all-delete-orphan'
+    }
 }

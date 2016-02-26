@@ -18,4 +18,8 @@ class Address {
     String toString() {
         "$city, $street, $home"
     }
+
+    static mapping = {
+        phones cascade: 'all-delete-orphan'
+    }
 }
