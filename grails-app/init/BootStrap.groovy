@@ -1,4 +1,6 @@
+import com.satch.domain.Address
 import com.satch.domain.Product
+import com.satch.domain.Store
 import grails.converters.JSON
 
 class BootStrap {
@@ -9,6 +11,24 @@ class BootStrap {
 
     def init = { servletContext ->
         //TODO:Find better place for marshaller registration
+        registerMarshaller()
+
+        //create workarea directory if not exists
+        File catalinaBase = new File(System.getProperty("catalina.base")).getAbsoluteFile()
+        File workareaDir = new File(catalinaBase, "webapps/workarea")
+        if (!workareaDir.exists()) {
+            workareaDir.mkdir()
+        }
+
+        if (grailsApplication.config.com.satch.populatedb != 'update') {
+            demoDataInitializationService.initDemoData(50, 5)
+        }
+    }
+
+    def destroy = {
+    }
+
+    def registerMarshaller = {
         JSON.registerObjectMarshaller(Product) { Product product ->
             if (product) {
                 return [
@@ -32,22 +52,59 @@ class BootStrap {
                             ]
                         }
                 ]
+            } else {
+                return null
             }
         }
 
-        //create workarea directory if not exists
-        File catalinaBase = new File(System.getProperty("catalina.base")).getAbsoluteFile()
-        File workareaDir = new File(catalinaBase, "webapps/workarea")
-        if (!workareaDir.exists()) {
-            workareaDir.mkdir()
+
+        JSON.registerObjectMarshaller(Address) { Address address ->
+            if (address) {
+                return [
+                        id    : address.id,
+                        home  : address.home,
+                        city  : address.city,
+                        street: address.street,
+                        phones: address.phones.collect { [number: it.number] }
+                ]
+            } else {
+                return null
+            }
         }
 
-        if (grailsApplication.config.com.satch.populatedb != 'update') {
-            demoDataInitializationService.initDemoData(50, 5)
+        JSON.registerObjectMarshaller(Store) { Store store ->
+            if (store) {
+                return [
+                        id             : store.id,
+                        storeId        : store.storeId,
+                        name           : store.name,
+                        description    : store.description,
+                        address        : store.address,
+                        attributeValues: store.attributeValues?.collect { attributeValue ->
+                            [
+                                    attribute: [
+                                            attributeId: attributeValue.attribute.attributeId,
+                                            description: attributeValue.attribute.description
+                                    ],
+                                    value    : attributeValue.value
+                            ]
+                        },
+                        catalogs       : store.catalogs?.collect { catalog ->
+                            [
+                                    id         : catalog.id,
+                                    description: catalog.description,
+                                    catalogId  : catalog.catalogId
+                            ]
+                        },
+                        //TODO: Implement stocks
+                        stocks         : []
+                ]
+            } else {
+                return null
+            }
         }
-    }
 
-    def destroy = {
+
     }
 
 }
