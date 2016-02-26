@@ -21,8 +21,12 @@ class ProductController {
         def products = productSearchService.searchProducts(params)
 
         response.reset()
-        response.setStatus(206)
-        response.setHeader("Content-range", "products " + params.offset ? params.offset.toString() : "0" + "-" + products.size().toString() + "/" + Long.toString(Product.count(params)));
+        response.setStatus(HttpURLConnection.HTTP_PARTIAL)
+        def offset = params.offset && params.offset.isLong() ? params.long('offset') : 0
+        def rangeStart = offset.toString()
+        def rangeEnd = (offset + products.size() - 1).toString()
+        def count = Product.count().toString()
+        response.setHeader("Content-range", "products $rangeStart-$rangeEnd/$count")
         render products as JSON
     }
 

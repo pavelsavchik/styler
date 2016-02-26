@@ -1,5 +1,6 @@
 package com.satch.controllers
 
+import com.satch.domain.Product
 import com.satch.domain.Store
 import grails.converters.JSON
 import grails.transaction.Transactional
@@ -9,7 +10,15 @@ class StoreController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE", show: "GET", list: "GET"]
 
     def list() {
-        def stores = Store.list()
+        def stores = Store.list(params)
+
+        response.reset()
+        response.setStatus(HttpURLConnection.HTTP_PARTIAL)
+        def offset = params.offset && params.offset.isLong() ? params.long('offset') : 0
+        def rangeStart = offset.toString()
+        def rangeEnd = (offset + stores.size() - 1).toString()
+        def count = Store.count().toString()
+        response.setHeader("Content-range", "stores $rangeStart-$rangeEnd/$count")
         return render(stores as JSON)
     }
 
