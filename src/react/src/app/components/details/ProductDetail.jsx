@@ -17,6 +17,7 @@ const styles = {
   },
   button: {
     margin: 12,
+    marginLeft: 0,
   },
 };
 
@@ -60,14 +61,13 @@ export default class ProductDetails extends React.Component {
 
   handleBack = () => {
     this.context.history.goBack();
-    window.h = this.context.history;
   }
 
   render() {
     if(this.state.isInfiniteLoading){
       return (
         <div style={styles.container}>
-          <CircularProgress />;
+          <CircularProgress />
         </div>
       )
     }
@@ -81,12 +81,12 @@ export default class ProductDetails extends React.Component {
         />
         <div style={styles.container}>
           <Paper>
-            <img src="http://lorempixel.com/320/480/fashion" onClick={this.onClick}/>
+            <img src="http://lorempixel.com/320/480/fashion" />
             <p>{product.manufacturer}</p>
             <h2>{product.shortDesc}</h2>
             <p>{product.longDesc}</p>
             <p>{JSON.stringify(product.attributeValues)}</p>
-            <h3>$ {product.price}</h3>
+            <h3>$ {product.price && product.price.value} </h3>
           </Paper>
         </div>
       </div>

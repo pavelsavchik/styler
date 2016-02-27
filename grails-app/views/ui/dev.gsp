@@ -33,6 +33,7 @@
 <script>
   window.SatchUi.default.renderSatchUi(document.getElementById('app'), {
     productRestUrl: '${g.createLink(absolute: true, uri:'/products')}',
+    storeRestUrl: '${g.createLink(absolute: true, uri:'/stores')}',
     classificationRestUrl: '${g.createLink(absolute: true, uri:'/classifications')}'
   });
 </script>

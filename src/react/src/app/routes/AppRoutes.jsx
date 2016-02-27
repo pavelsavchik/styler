@@ -7,19 +7,21 @@ import {
 
 // Here we define all our material-ui ReactComponents.
 import Master from '../components/Master.jsx';
-import Ad from '../components/Ad.jsx';
+import News from '../components/News.jsx';
 import Catalogue from '../components/Catalogue.jsx';
 import Stores from '../components/Stores.jsx';
 import ProductDetails from '../components/details/ProductDetail.jsx';
+import StoreDetails from '../components/details/StoreDetail.jsx';
 
 
 const AppRoutes = (
   <Route path="/" component={Master}>
-    <IndexRoute component={Ad} />
-    <Route path="news" component={Ad} />
+    <IndexRoute component={News} />
+    <Route path="news" component={News} />
     <Route path="catalogue" component={Catalogue} />
     <Route path="stores" component={Stores} />
     <Route path="product/:productId" component={ProductDetails} />
+    <Route path="store/:storeId" component={StoreDetails} />
   </Route>
 );
 

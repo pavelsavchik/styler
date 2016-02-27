@@ -12,6 +12,7 @@ class UrlMappings {
         "/"(controller: "ui", action: 'index')
         "500"(view:'/error')
         "404"(view:'/notFound')
+        "/applicationInfo"(view:'/index')
 
         //Product REST
         "/products"(controller: 'product', action: 'save', method: 'POST')

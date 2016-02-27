@@ -95,8 +95,9 @@ class ClassificationFilter extends React.Component {
         valueLink={{value: this.props.query, requestChange: this.onRequestChange}}
       >
         <ListItem primaryText="Back" value={{sex: null, classification: null}} />
-        {classificationTree && classificationTree.map( cls => {
+        {classificationTree && classificationTree.map( (cls, i) => {
           return <ListItem
+            key={i}
             primaryText={cls.description}
             value={{classification: cls.classificationId}}
           />
@@ -121,8 +122,9 @@ class ClassificationFilter extends React.Component {
         valueLink={{value: this.props.query, requestChange: this.onRequestChange}}
       >
         <ListItem primaryText="Back" value={{sex: sex, classification: null, classificationGroup: null}} />
-        {clsGrps.map( clsGrp => {
+        {clsGrps.map( (clsGrp, i) => {
           return <ListItem
+            key={i}
             primaryText={clsGrp.description}
             value={{classificationGroup: clsGrp.classificationGroupId}}
           />

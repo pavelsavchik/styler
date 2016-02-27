@@ -7,19 +7,11 @@ import {Spacing} from 'material-ui/lib/styles';
 import {StyleResizable} from 'material-ui/lib/mixins';
 
 import {Colors, getMuiTheme} from 'material-ui/lib/styles';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import theme from './themes/default';
 
 import AppLeftNav from './AppLeftNav';
 import FullWidthSection from './FullWidthSection';
-
-const githubButton = (
-  <IconButton
-    iconClassName="muidocs-icon-custom-github"
-    href="https://github.com/callemall/material-ui"
-    linkButton={true}
-  />
-);
-
-const muiTheme = getMuiTheme();
 
 const Master = React.createClass({
 
@@ -39,7 +31,7 @@ const Master = React.createClass({
 
   getInitialState() {
     return {
-      muiTheme: muiTheme,
+      muiTheme: ThemeManager.getMuiTheme(theme),
       leftNavOpen: false,
     };
   },
@@ -178,7 +170,6 @@ const Master = React.createClass({
           onLeftIconButtonTouchTap={this.handleTouchTapLeftIconButton}
           title={title}
           zDepth={0}
-          iconElementRight={githubButton}
           style={styles.appBar}
           showMenuIconButton={showMenuIconButton}
         />
@@ -204,24 +195,8 @@ const Master = React.createClass({
         />
         <FullWidthSection style={styles.footer}>
           <p style={prepareStyles(styles.p)}>
-            {'Hand crafted with love by the engineers at '}
-            <a style={styles.a} href="http://call-em-all.com">
-              Call-Em-All
-            </a>
-            {' and our awesome '}
-            <a
-              style={prepareStyles(styles.a)}
-              href="https://github.com/callemall/material-ui/graphs/contributors"
-            >
-              contributors
-            </a>.
+            {'Satch #'}
           </p>
-          <IconButton
-            iconStyle={styles.iconButton}
-            iconClassName="muidocs-icon-custom-github"
-            href="https://github.com/callemall/material-ui"
-            linkButton={true}
-          />
         </FullWidthSection>
       </div>
     );

@@ -1,70 +1,20 @@
-/**
- * In this file, we create a React component
- * which incorporates components providedby material-ui.
- */
-
 import React from 'react';
-import RaisedButton from 'material-ui/lib/raised-button';
-import Dialog from 'material-ui/lib/dialog';
-import Colors from 'material-ui/lib/styles/colors';
-import FlatButton from 'material-ui/lib/flat-button';
-import getMuiTheme from 'material-ui/lib/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
+import StoreList from './stores/StoreList.jsx';
 
 const styles = {
   container: {
     textAlign: 'center',
-    paddingTop: 200,
   },
 };
 
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: Colors.grey500,
-  },
-});
 
-class Main extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.handleRequestClose = this.handleRequestClose.bind(this);
-    this.handleTouchTap = this.handleTouchTap.bind(this);
-
-    this.state = {
-      open: false,
-    };
-  }
-
-  handleRequestClose() {
-    this.setState({
-      open: false,
-    });
-  }
-
-  handleTouchTap() {
-    this.setState({
-      open: true,
-    });
-  }
+export default class Stores extends React.Component {
 
   render() {
-    const standardActions = (
-      <FlatButton
-        label="Okey"
-        secondary={true}
-        onTouchTap={this.handleRequestClose}
-      />
-    );
-
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.container}>
-          <h1>Stores</h1>
-          <h2>example project</h2>
-        </div>
-      </MuiThemeProvider>
+      <div style={styles.container}>
+        <StoreList/>
+      </div>
     );
   }
 }
-
-export default Main;

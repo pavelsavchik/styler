@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { pushState } from 'redux-router';
-import Infinite from 'react-infinite';
+import Waypoint from 'react-waypoint';
 
 import CircularProgress from 'material-ui/lib/circular-progress';
 import ProductTile from './ProductTile.jsx';
@@ -50,21 +50,24 @@ class ProductList extends React.Component {
   }
 
   elementInfiniteLoad = () => {
-    return <CircularProgress />;
+    if(this.state.isInfiniteLoading) {
+      return <CircularProgress />;
+    } else {
+      return null;
+    }
   }
 
   render () {
-    return <Infinite elementHeight={50}
-                     infiniteLoadBeginEdgeOffset={200}
-                     useWindowAsScrollContainer={true}
-                     onInfiniteLoad={this.handleInfiniteLoad}
-                     loadingSpinnerDelegate={this.elementInfiniteLoad()}
-                     isInfiniteLoading={this.state.isInfiniteLoading}
-    >
-      {this.state.products.map((product,i) => {
-        return <ProductTile key={i} num={i} product={product}/>
-      })}
-    </Infinite>;
+    console.log(this.state.products);
+    return (
+      <div>
+        {this.state.products.map((product,i) => {
+          return <ProductTile key={i} num={i} product={product}/>
+        })}
+        {this.elementInfiniteLoad()}
+        <Waypoint onEnter={this.handleInfiniteLoad}/>
+      </div>
+    );
   }
 }
 

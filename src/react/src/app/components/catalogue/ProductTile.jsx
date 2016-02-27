@@ -25,7 +25,7 @@ class Main extends React.Component {
   }
 
   onClick = () => {
-    this.context.history.push(`/product/${this.props.product.productId}`);
+    this.context.history.push(`/product/${this.props.product.id}`);
   }
 
   render() {
@@ -34,7 +34,7 @@ class Main extends React.Component {
       <Paper style={styles.paper}>
         <img src={"http://lorempixel.com/160/240/fashion/" + ( num % 11 ).toString()} onClick={this.onClick}/>
         <p style={styles.p} onClick={this.onClick}>{product.shortDesc}</p>
-        <p style={styles.p} onClick={this.onClick}>$ {product.price.toString()}</p>
+        <p style={styles.p} onClick={this.onClick}>$ {product.price.value}</p>
       </Paper>
     );
   }
