@@ -5,7 +5,6 @@ import {
   IndexRoute,
 } from 'react-router';
 
-// Here we define all our material-ui ReactComponents.
 import Master from '../components/Master.jsx';
 import News from '../components/News.jsx';
 import Catalogue from '../components/Catalogue.jsx';
