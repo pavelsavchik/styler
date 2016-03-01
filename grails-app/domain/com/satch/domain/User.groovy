@@ -1,12 +1,17 @@
 package com.satch.domain
 
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
+
+@EqualsAndHashCode(includes='username')
+@ToString(includes='username', includeNames=true, includePackage=false)
 class User implements Serializable {
 
 	private static final long serialVersionUID = 1
 
 	transient springSecurityService
 
-	static hasOne = [vkUser: VkUser, supplier: Supplier]
+	static hasOne = [supplier: Supplier]
 
 	String username
 	String password
@@ -19,21 +24,6 @@ class User implements Serializable {
 		this()
 		this.username = username
 		this.password = password
-	}
-
-	@Override
-	int hashCode() {
-		username?.hashCode() ?: 0
-	}
-
-	@Override
-	boolean equals(other) {
-		is(other) || (other instanceof User && other.username == username)
-	}
-
-	@Override
-	String toString() {
-		username
 	}
 
 	Set<Role> getAuthorities() {
@@ -50,11 +40,6 @@ class User implements Serializable {
 		}
 	}
 
-	def addToOAuthIDs(Map params){
-		def vkUser = new VkUser(provider: params.provider, accessToken: params.accessToken)
-		this.vkUser = vkUser
-	}
-
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
@@ -64,7 +49,6 @@ class User implements Serializable {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
-		vkUser nullable: true
 		supplier nullable: true
 	}
 
