@@ -7,7 +7,7 @@ class Store {
     Address address
 
     static belongsTo = [supplier : Supplier]
-    static hasMany = [catalogs: Catalog, attributeValues: AttributeValue, stocks: ProductCount]
+    static hasMany = [catalogs: Catalog, attributeValues: AttributeValue, stocks: ProductCount, sellers: User]
 
     static constraints = {
         storeId blank: false, unique: 'supplier'

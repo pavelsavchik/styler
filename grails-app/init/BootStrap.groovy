@@ -1,4 +1,5 @@
 import com.satch.domain.Address
+import com.satch.domain.Message
 import com.satch.domain.Product
 import com.satch.domain.Store
 import grails.converters.JSON
@@ -98,6 +99,21 @@ class BootStrap {
                         },
                         //TODO: Implement stocks
                         stocks         : []
+                ]
+            } else {
+                return null
+            }
+        }
+
+        JSON.registerObjectMarshaller(Message) { Message message ->
+            if (message) {
+                return [
+                        id       : message.id,
+                        recipient: [id: message.recipient.id],
+                        sender   : [id: message.sender.id],
+                        date     : message.date,
+                        text     : message.text,
+                        wasRead  : message.wasRead
                 ]
             } else {
                 return null

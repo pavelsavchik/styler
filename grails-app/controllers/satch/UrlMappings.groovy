@@ -33,6 +33,12 @@ class UrlMappings {
         "/stores/$id"(controller: 'store', action: 'update', method: 'PUT')
         "/stores/$id"(controller: 'store', action: 'delete', method: 'DELETE')
 
+        "/messages/$id"(controller: 'message', action: 'show', method: 'GET')
+        "/messages/"(controller: 'message', action: 'list', method: 'GET')
+        "/messages/"(controller: 'message', action: 'sendMessage', method: 'POST')
+        "/messages/requestAvailability"(controller: 'message', action: 'requestAvailability', method: 'POST')
+        "/messages/count"(controller: 'message', action: 'getCurrentUserMessageCount', method: 'GET')
+
         //Classification REST
         "/classifications"(controller: 'classification', action: 'list', method: 'GET')
     }

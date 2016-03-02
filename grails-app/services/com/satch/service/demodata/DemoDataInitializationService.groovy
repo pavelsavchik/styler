@@ -58,6 +58,11 @@ class DemoDataInitializationService {
         user4.supplier = Supplier.findBySupplierId("puma")
         user4.save()
 
+        Store.list().each {
+            it.addToSellers(user1)
+            it.save()
+        }
+
         new UserRole(user1, role1).save()
         new UserRole(user2, role2).save()
         new UserRole(user3, role3).save()
