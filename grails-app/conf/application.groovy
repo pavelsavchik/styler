@@ -16,7 +16,7 @@
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.satch.domain.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.satch.domain.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.satch.domain.Role'
-grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+grails.plugin.springsecurity.interceptUrlMap = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
 	[pattern: '/index',          access: ['permitAll']],
