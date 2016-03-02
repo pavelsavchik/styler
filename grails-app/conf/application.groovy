@@ -13,6 +13,7 @@
 //}
 
 // Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.satch.domain.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.satch.domain.UserRole'
 grails.plugin.springsecurity.authority.className = 'com.satch.domain.Role'
