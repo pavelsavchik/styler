@@ -5,53 +5,57 @@ import com.satch.domain.Product
 import com.satch.domain.Store
 import com.satch.domain.User
 import grails.transaction.Transactional
+import grails.web.servlet.mvc.GrailsParameterMap
 
 @Transactional
 class MessageService {
 
     def springSecurityService
 
-    List<Message> getUserMessages(User user, pagingParams) {
-        return Message.executeQuery(
-                "from Message where recipient = :user or sender = :user order by date desc",
-                ['user': user], pagingParams)
+    def SEARCH_FIELDS = [
+            'sender.id'       : 'Long',
+            'recipient.id'    : 'Long',
+            'date'            : '',
+            'status'          : 'Integer',
+            'product.id'      : 'Long',
+            'parentMessage.id': 'Long'
+    ]
 
-    }
+    def PAGING_FIELDS = [
+            'max',
+            'offset'
+    ]
 
-    def getCurrentUserUnreadMessageCount() {
-        def user = springSecurityService.getCurrentUser()
-        return Message.executeQuery(
-                "select count(*) from Message where recipient = :user and wasRead=false",
-                ['user': user]).first()
-    }
+    List<Message> search(Map searchParams) {
+        def query = "from Message m where 1 = 1 "
+        def queryParams = [:]
+        def pagingParams = [:]
 
-    Message formRequestAvailabilityMessage(String text, long storeId, long productId) {
-        def product = Product.get(productId)
-        if (!product) {
-            throw new Exception("Product with id ${productId} not found!")
+        //Custom logic for user messages restriction
+        if (!searchParams.'user') {
+            throw new Exception("user is wrong!")
         }
-        def messageText = "Hello! Is product '${product.productId}.' available?"
-        if (text) {
-            messageText += "\nNote: " + text
-        }
-        //TODO: improve recipient logic
-        def store = Store.get(storeId)
-        if (!store) {
-            throw new Exception("Store with id ${storeId} not found!")
-        }
+        query += " and (recipient = :user or sender = :user) "
+        queryParams.put("user", searchParams.'user')
 
-        def recipient = store?.sellers?.first()
-        if (!recipient) {
-            throw new Exception("Store has no sellers, so message can't be sent.")
+        SEARCH_FIELDS.each { searchField, fieldType ->
+            if (searchParams[searchField]) {
+                query += " and m.$searchField in (:${searchField.replace('.', '')}List)"
+                def valueList = searchParams.list(searchField)
+                if (fieldType)
+                    valueList = valueList.collect { it."to$fieldType"() }
+                queryParams.put("${searchField.replace('.', '')}List" as String, valueList)
+            }
         }
 
-        return new Message(
-                text: messageText,
-                sender: springSecurityService.getCurrentUser(),
-                recipient: recipient,
-                date: new Date()
-        )
+        PAGING_FIELDS.each { pagingField ->
+            if (searchParams[pagingField]) {
+                pagingParams << [(pagingField): searchParams[pagingField]]
+            }
+        }
 
+        def messages = Message.executeQuery(query, queryParams, pagingParams)
 
+        return messages
     }
 }

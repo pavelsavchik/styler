@@ -35,9 +35,12 @@ class UrlMappings {
 
         "/messages/$id"(controller: 'message', action: 'show', method: 'GET')
         "/messages/"(controller: 'message', action: 'list', method: 'GET')
-        "/messages/"(controller: 'message', action: 'sendMessage', method: 'POST')
-        "/messages/requestAvailability"(controller: 'message', action: 'requestAvailability', method: 'POST')
-        "/messages/count"(controller: 'message', action: 'getCurrentUserMessageCount', method: 'GET')
+        "/messages/"(controller: 'message', action: 'save', method: 'POST')
+        "/messages/$id"(controller: 'message', action: 'update', method: 'PUT')
+        "/messages/$id"(controller: 'message', action: 'delete', method: 'DELETE')
+
+//        "/messages/requestAvailability"(controller: 'message', action: 'requestAvailability', method: 'POST')
+//        "/messages/count"(controller: 'message', action: 'getCurrentUserMessageCount', method: 'GET')
 
         //Classification REST
         "/classifications"(controller: 'classification', action: 'list', method: 'GET')

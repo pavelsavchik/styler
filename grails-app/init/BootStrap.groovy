@@ -107,14 +107,21 @@ class BootStrap {
 
         JSON.registerObjectMarshaller(Message) { Message message ->
             if (message) {
-                return [
+                def messageJSON =  [
                         id       : message.id,
                         recipient: [id: message.recipient.id],
                         sender   : [id: message.sender.id],
                         date     : message.date,
                         text     : message.text,
-                        wasRead  : message.wasRead
+                        status   : message.status
                 ]
+                if(message.product){
+                    messageJSON.put('product', [id: message.product.id])
+                }
+                if(message.parentMessage){
+                    messageJSON.put('parentMessage', [id: message.parentMessage.id])
+                }
+                return messageJSON
             } else {
                 return null
             }
