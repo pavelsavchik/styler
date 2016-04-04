@@ -32,9 +32,9 @@ class MessageController {
 
     @Transactional
     def save() {
-        Message newMessage = new Message(params)
+        Message newMessage = new Message(request.JSON)
 //        message.sender = User.get(1)
-        newMessage.sender = User.get(1)
+        newMessage.sender = springSecurityService.getCurrentUser()
 
         newMessage.date = new Date()
         newMessage.status = 100

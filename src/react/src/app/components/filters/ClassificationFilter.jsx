@@ -81,8 +81,8 @@ class ClassificationFilter extends React.Component {
       <SelectableList
         valueLink={{value: this.props.query, requestChange: this.onRequestChange}}
       >
-        <ListItem primaryText="Men" value={{sex: 'men'}} />
-        <ListItem primaryText="Women" value={{sex: 'women'}} />
+        <ListItem primaryText="Мужчина" value={{sex: 'men'}} />
+        <ListItem primaryText="Женщина" value={{sex: 'women'}} />
       </SelectableList>
     )
   }
@@ -94,7 +94,7 @@ class ClassificationFilter extends React.Component {
       <SelectableList
         valueLink={{value: this.props.query, requestChange: this.onRequestChange}}
       >
-        <ListItem primaryText="Back" value={{sex: null, classification: null}} />
+        <ListItem primaryText="Назад" value={{sex: null, classification: null}} />
         {classificationTree && classificationTree.map( (cls, i) => {
           return <ListItem
             key={i}

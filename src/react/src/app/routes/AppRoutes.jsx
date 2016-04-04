@@ -11,6 +11,7 @@ import Catalogue from '../components/Catalogue.jsx';
 import Stores from '../components/Stores.jsx';
 import ProductDetails from '../components/details/ProductDetail.jsx';
 import StoreDetails from '../components/details/StoreDetail.jsx';
+import LogIn from '../components/LogIn.jsx';
 
 
 const AppRoutes = (
@@ -21,6 +22,7 @@ const AppRoutes = (
     <Route path="stores" component={Stores} />
     <Route path="product/:productId" component={ProductDetails} />
     <Route path="store/:storeId" component={StoreDetails} />
+    <Route path="login" component={LogIn}/>
   </Route>
 );
 

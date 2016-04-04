@@ -13,6 +13,7 @@ import {
   Typography,
 } from 'material-ui/lib/styles';
 import zIndex from 'material-ui/lib/styles/zIndex';
+import UserAction from '../actions/user';
 
 const SelectableList = SelectableContainerEnhance(List);
 
@@ -67,6 +68,8 @@ const AppLeftNav = React.createClass({
       onRequestChangeList,
       open,
       style,
+      user,
+      updateUser,
     } = this.props;
 
     const {
@@ -89,16 +92,24 @@ const AppLeftNav = React.createClass({
         <SelectableList
           valueLink={{value: location.pathname, requestChange: onRequestChangeList}}
         >
-          <ListItem primaryText="Stores" value="/stores" />
-          <ListItem primaryText="News" value="/news" />
+          <ListItem primaryText="Магазины " value="/stores" />
+          <ListItem primaryText="Новости" value="/news" />
         </SelectableList>
         <Divider />
         <ClassificationFilter location={location} />
         <Divider />
+        {user && <ListItem
+          primaryText="Выйти"
+          onTouchTap={() => {
+              updateUser(null);
+              this.handleTouchTapHeader();
+            }
+          } />
+        }
         <SelectableList
           valueLink={{value: '', requestChange: this.handleRequestChangeLink}}
         >
-          <ListItem primaryText="Sign out"/>
+          {!user && <ListItem primaryText="Войти " value="/login" /> }
         </SelectableList>
       </LeftNav>
     );
@@ -106,6 +117,11 @@ const AppLeftNav = React.createClass({
 });
 
 export default connect(
-  state => ({ query: state.router.location.query }),
-  { pushState }
+  state => (
+    {
+      query: state.router.location.query,
+      user: state.user,
+    }
+  ),
+  Object.assign({ pushState }, UserAction)
 )(AppLeftNav);
