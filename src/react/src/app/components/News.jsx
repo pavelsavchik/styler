@@ -9,7 +9,6 @@ import MuiThemeProvider from 'material-ui/lib/MuiThemeProvider';
 const styles = {
   container: {
     textAlign: 'center',
-    paddingTop: 200,
   },
 };
 
@@ -53,21 +52,8 @@ class Main extends React.Component {
     return (
       <MuiThemeProvider muiTheme={this.context.muiTheme}>
         <div style={styles.container}>
-          <Dialog
-            open={this.state.open}
-            title="Super Secret Password"
-            actions={standardActions}
-            onRequestClose={this.handleRequestClose}
-          >
-            1-2-3-4-5
-          </Dialog>
-          <h1>Ad</h1>
-          <h2>example project</h2>
-          <RaisedButton
-            label="Super Secret Password"
-            primary={true}
-            onTouchTap={this.handleTouchTap}
-          />
+          <h1>Новости</h1>
+          <h2>Здесь может быть ваша реклама</h2>
         </div>
       </MuiThemeProvider>
     );

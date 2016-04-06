@@ -12,6 +12,7 @@ import Stores from '../components/Stores.jsx';
 import ProductDetails from '../components/details/ProductDetail.jsx';
 import StoreDetails from '../components/details/StoreDetail.jsx';
 import LogIn from '../components/LogIn.jsx';
+import Messages from '../components/Messages.jsx';
 
 
 const AppRoutes = (
@@ -23,6 +24,7 @@ const AppRoutes = (
     <Route path="product/:productId" component={ProductDetails} />
     <Route path="store/:storeId" component={StoreDetails} />
     <Route path="login" component={LogIn}/>
+    <Route path="messages" component={Messages}/>
   </Route>
 );
 

@@ -121,7 +121,7 @@ class ClassificationFilter extends React.Component {
       <SelectableList
         valueLink={{value: this.props.query, requestChange: this.onRequestChange}}
       >
-        <ListItem primaryText="Back" value={{sex: sex, classification: null, classificationGroup: null}} />
+        <ListItem primaryText="Назад" value={{sex: sex, classification: null, classificationGroup: null}} />
         {clsGrps.map( (clsGrp, i) => {
           return <ListItem
             key={i}

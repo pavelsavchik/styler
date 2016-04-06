@@ -7,6 +7,9 @@ import ListItem from 'material-ui/lib/lists/list-item';
 import Divider from 'material-ui/lib/divider';
 import ClassificationFilter from './filters/ClassificationFilter.jsx';
 import {SelectableContainerEnhance} from 'material-ui/lib/hoc/selectable-enhance';
+import Badge from 'material-ui/lib/badge';
+import FontIcon from 'material-ui/lib/font-icon';
+import ContentInbox from 'material-ui/lib/svg-icons/content/inbox';
 import {
   Colors,
   Spacing,
@@ -32,6 +35,7 @@ const AppLeftNav = React.createClass({
   contextTypes: {
     muiTheme: React.PropTypes.object,
     router: React.PropTypes.func,
+    user: React.PropTypes.object,
   },
 
   handleRequestChangeLink(event, value) {
@@ -68,7 +72,6 @@ const AppLeftNav = React.createClass({
       onRequestChangeList,
       open,
       style,
-      user,
       updateUser,
     } = this.props;
 
@@ -76,6 +79,7 @@ const AppLeftNav = React.createClass({
       prepareStyles,
     } = this.context.muiTheme;
 
+    let user  = {username: "admin"};
     const styles = this.getStyles();
 
     return (
@@ -94,22 +98,36 @@ const AppLeftNav = React.createClass({
         >
           <ListItem primaryText="Магазины " value="/stores" />
           <ListItem primaryText="Новости" value="/news" />
+          {user &&
+          <ListItem
+            primaryText="Сообщения"
+            value="/messages"
+            rightIcon={
+              <Badge
+                badgeContent={5}
+                secondary={true}
+                style={{positionTop: "0"}}
+              />
+            }
+          />
+          }
         </SelectableList>
         <Divider />
         <ClassificationFilter location={location} />
         <Divider />
-        {user && <ListItem
-          primaryText="Выйти"
-          onTouchTap={() => {
+        <SelectableList
+          valueLink={{value: location.pathname, requestChange: this.handleRequestChangeLink}}
+        >
+          {!user && <ListItem primaryText="Войти " value="/login" /> }
+
+          {user && <ListItem
+            primaryText="Выйти"
+            onTouchTap={() => {
               updateUser(null);
               this.handleTouchTapHeader();
             }
           } />
-        }
-        <SelectableList
-          valueLink={{value: '', requestChange: this.handleRequestChangeLink}}
-        >
-          {!user && <ListItem primaryText="Войти " value="/login" /> }
+          }
         </SelectableList>
       </LeftNav>
     );

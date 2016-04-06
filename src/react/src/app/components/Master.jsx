@@ -143,6 +143,7 @@ const Master = React.createClass({
 
     const styles = this.getStyles();
     const title =
+      history.isActive('/messages') ? 'Сообщения' :
       history.isActive('/login') ? 'Войти' :
       history.isActive('/stores') ? 'Магазины' :
         history.isActive('/catalogue') ? 'Каталог' :

@@ -7,6 +7,7 @@ export default class ContextSetter extends React.Component {
         storeRestUrl: React.PropTypes.string,
         classificationRestUrl: React.PropTypes.string,
         history: React.PropTypes.object,
+        user: React.PropTypes.object,
     }
 
     static childContextTypes = {
@@ -14,6 +15,7 @@ export default class ContextSetter extends React.Component {
         storeRestUrl: React.PropTypes.string,
         classificationRestUrl: React.PropTypes.string,
         history: React.PropTypes.object,
+        user: React.PropTypes.object,
     }
 
     getChildContext(){
@@ -22,6 +24,7 @@ export default class ContextSetter extends React.Component {
             storeRestUrl: this.props.storeRestUrl,
             classificationRestUrl: this.props.classificationRestUrl,
             history: this.props.history,
+            user: this.props.user,
         }
     }
 

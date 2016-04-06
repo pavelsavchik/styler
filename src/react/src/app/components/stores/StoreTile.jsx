@@ -3,8 +3,8 @@ import Paper from 'material-ui/lib/paper';
 
 const styles = {
   paper: {
-    height: 240,
-    width: 240,
+    height: 180,
+    width: 220,
     margin: 10,
     textAlign: 'center',
     display: 'inline-block',
